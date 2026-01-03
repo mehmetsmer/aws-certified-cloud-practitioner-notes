@@ -20,15 +20,30 @@ This document serves as a technical reference guide for key AWS services and fea
 ## 🖥️ 2. Amazon EC2 (Elastic Compute Cloud)
 **Console Path:** Search Bar > "EC2"
 
+This section consolidates topics from EC2 Fundamentals, Solution Architect Level Features, and Storage Options.
+
 | Feature / Service | Technical Definition & Use Case | Console Location |
 | :--- | :--- | :--- |
-| **Instances** | Virtual servers in the AWS Cloud. Provides scalable computing capacity. | EC2 Dashboard > Left Menu > **Instances** |
-| **AMI (Amazon Machine Image)** | A template that contains the software configuration (OS, application server, and applications) required to launch an instance. | Selected during "Launch Instance" wizard. |
-| **Instance Types** | Combinations of CPU, memory, storage, and networking capacity (e.g., t2.micro, m5.large) to fit different use cases. | Selected during "Launch Instance" wizard. |
-| **Security Groups** | A virtual firewall for your EC2 instances to control incoming and outgoing traffic. Acts at the instance level. | EC2 Dashboard > Left Menu > **Security Groups** |
-| **Key Pairs** | A set of security credentials (private key and public key) used to prove your identity when connecting to an instance. | EC2 Dashboard > Left Menu > **Key Pairs** |
-| **User Data** | Scripts or configuration parameters run on the instance during the initial boot process (bootstrapping). | Launch Instance Wizard > **Advanced Details** section. |
-| **Elastic IP** | A static IPv4 address designed for dynamic cloud computing. It remains associated with your account until you release it. | EC2 Dashboard > Left Menu > **Elastic IPs** |
+| **EC2 User Data** | Bootstrapping scripts run only once when the instance is first launched. Used to install software/updates automatically. | Launch Instance Wizard > **Advanced Details** |
+| **Instance Types** | Defines the hardware of the host computer (CPU, RAM, Network). Examples: t2.micro, c5.large, r5.xlarge. | Selected during "Launch Instance" wizard. |
+| **Security Groups** | Stateful firewall acting at the instance level. Controls inbound/outbound traffic (allow rules only). | EC2 Dashboard > Left Menu > **Security Groups** |
+| **Key Pairs (SSH)** | Credential file (.pem or .ppk) required to connect to an instance via SSH. | EC2 Dashboard > Left Menu > **Key Pairs** |
+| **EC2 Instance Connect** | Browser-based SSH connection tool. Works without managing local key files. | EC2 Dashboard > Select Instance > **Connect** |
+| **IAM Roles for EC2** | Assigns permissions to an EC2 instance so it can access other AWS services (like S3) without hardcoding credentials. | Launch Instance Wizard > **Advanced Details** |
+| **Purchasing Options** | Payment models: **On-Demand** (pay-as-you-go), **Savings Plans** (commitment), **Reserved** (commitment), **Spot** (bidding). | EC2 Dashboard > Left Menu > **Instances** (and submenus) |
+| **Spot Instances** | Spare EC2 capacity offered at steep discounts (up to 90%). Can be reclaimed by AWS with 2 mins notice. | EC2 Dashboard > Left Menu > **Spot Requests** |
+| **Elastic IP** | A static Public IPv4 address. You own it until you release it. Helps mask instance failures by remapping IP. | EC2 Dashboard > Left Menu > **Elastic IPs** |
+| **Placement Groups** | Controls how instances are placed on physical hardware. Strategies: **Cluster** (Performance), **Spread** (Safety), **Partition** (Distributed). | EC2 Dashboard > Left Menu > **Placement Groups** |
+| **ENI (Elastic Network Interface)** | A virtual network card attached to an instance. Primary ENIs are default; secondary ENIs facilitate failover/management. | EC2 Dashboard > Left Menu > **Network Interfaces** |
+| **EC2 Hibernate** | Saves RAM state to the EBS root volume upon shutdown. Enables faster boot-up with applications pre-loaded. | Launch Instance Wizard > **Advanced Details** |
+| **AMI (Amazon Machine Image)** | A packaged image containing the OS and data to launch an instance. Can be AWS-provided or Custom. | EC2 Dashboard > Left Menu > **AMIs** |
+| **EBS (Elastic Block Store)** | Persistent block-level storage volumes for use with EC2 instances. Acts like a network drive or USB stick. | EC2 Dashboard > Left Menu > **Volumes** |
+| **EBS Snapshots** | Point-in-time backup of an EBS volume stored in S3. Incremental backups (only changes are saved). | EC2 Dashboard > Left Menu > **Snapshots** |
+| **Instance Store** | High-performance hardware disk physically attached to the host. **Ephemeral:** Data is lost if instance stops. | Selected via Instance Type (e.g., i3, d2 families) |
+| **EBS Volume Types** | Performance tiers: **gp3/gp2** (General), **io2/io1** (High IOPS), **st1/sc1** (HDD). Defines speed and cost. | Selected during Volume Creation. |
+| **EBS Multi-Attach** | Allows a single EBS volume (io1/io2 only) to be attached to multiple instances in the same AZ simultaneously. | EC2 Dashboard > Left Menu > **Volumes** |
+| **EBS Encryption** | Encrypts volume data and snapshots using KMS keys (AES-256). Handled transparently by AWS. | Checkbox during Volume Creation. |
+| **EFS (Elastic File System)** | Managed NFS file system. can be mounted by **hundreds** of instances across different AZs. Linux only. | Search Bar > "EFS" |
 
 ---
 
